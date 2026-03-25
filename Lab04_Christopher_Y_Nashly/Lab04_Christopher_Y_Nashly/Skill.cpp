@@ -22,3 +22,31 @@ Skill::Skill(std::string name, std::string damageType,
     power(clampRange(power, 1, 200)),
     energyCost(clampRange(energyCost, 0, 100)) {
 }
+
+Skill::~Skill() {
+    // Sin memoria dinamica propia
+}
+
+std::string Skill::getName() const { return name; }
+std::string Skill::getDamageType() const { return damageType; }
+int Skill::getPower() const { return power; }
+int Skill::getEnergyCost() const { return energyCost; }
+
+int Skill::calculateEffect() const {
+    if (damageType == "Magical")
+        return (int)(power * 1.5);
+    if (damageType == "Healing")
+        return (int)(power * 0.8);
+    return power; // Physical: 1.0x
+}
+
+std::string Skill::toString() const {
+    // ostringstream se usa para construir texto dinámicamente en memoria,
+    // en lugar de imprimirlo directamente en consola o escribirlo en un archivo.
+    std::ostringstream oss;
+    oss << name << " (" << damageType
+        << ", Poder:" << power
+        << ", Efecto:" << calculateEffect()
+        << ", Costo:" << energyCost << ")";
+    return oss.str();
+}
