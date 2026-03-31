@@ -20,7 +20,7 @@ Squad::~Squad() {
 void Squad::expand() {
 	int newCapacity = capacity * 2;
 	Warrior** newArray = new Warrior * [newCapacity];
-	for (int i = 0; i < count; i++) {
+	for (int i = 0; i < newCapacity; i++) {
 		newArray[i] = warriors[i];
 	}
 
@@ -51,7 +51,7 @@ bool Squad::dismiss(std::string name) {
 		if (warriors[i]->getName() == name)
 		{
 			delete warriors[i];
-			for (int j = i; j < count - 1; i++) {
+			for (int j = i; j < count - 1; j++) {
 				warriors[j] = warriors[j + 1];
 			}
 			warriors[count - 1] = nullptr;
@@ -82,6 +82,29 @@ int Squad::getCount()const {
 	return count;
 }
 
+Warrior** Squad::getByClass(std::string cls, int& resultCount) const {
+	resultCount = 0;
+
+	for (int i = 0; i < count; i++) {
+		if (warriors[i]->getCombatClass() == cls) {
+			resultCount++;
+		}
+	}
+
+	if (resultCount == 0) {
+		return nullptr;
+	}
+
+	Warrior** result = new Warrior * [resultCount];
+	int index = 0;
+	for (int i = 0; i < count; i++) {
+		if (warriors[i]->getCombatClass() == cls) {
+			result[index] = warriors[i];
+			index++; }
+	}
+	return result;
+}
+//funciones faltantes
 
 
 
