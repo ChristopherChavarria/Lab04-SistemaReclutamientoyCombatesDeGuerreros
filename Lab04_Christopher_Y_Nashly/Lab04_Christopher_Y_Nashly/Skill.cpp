@@ -41,8 +41,7 @@ int Skill::calculateEffect() const {
 }
 
 std::string Skill::toString() const {
-    // ostringstream se usa para construir texto dinámicamente en memoria,
-    // en lugar de imprimirlo directamente en consola o escribirlo en un archivo.
+   
     std::ostringstream oss;
     oss << name << " (" << damageType
         << ", Poder:" << power

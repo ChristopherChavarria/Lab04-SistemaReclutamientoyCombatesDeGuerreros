@@ -24,42 +24,45 @@ Warrior::Warrior(std::string name, std::string combatClass,	int attack, int defe
 	skillCount(0),
 	maxSkills(maxSkills > 8 ? maxSkills : 3) {
 
-
-	// TODO: crear el arreglo dinamico de punteros
-	// a Skill con capacidad this->maxSkills.
-	// Inicializar cada posicion a nullptr.
+	skills = new Skill * [this->maxSkills];
+	for (int i = 0; i < this->maxSkills; i++) {
+		skills[i] = nullptr;
+	}
 }
 
 Warrior ::~Warrior() {
+	for (int i = 0; i < skillCount; i++) {
+		delete skills[i];
+	}
 
-	// TODO: Liberar cada Skill individual (delete)
-	// y luego el arreglo de punteros (delete[]).
-	// Nulificar todo.
+	delete[] skills;
+	skills = nullptr;
+
 }
 
 bool Warrior::learnSkill(std::string name, std::string type, int power, int cost) {
 
-	    // TODO:
-        // 1. Si ya conoce una habilidad con ese nombre,
-		// 2. Si skillCount >= maxSkills, retornar false.
-		// 3. Crear una nueva Skill en el heap con new.
-		// 4. Almacenarla en skills[skillCount].
-		// 5. Incrementar skillCount.
-		// 6. Retornar true.
-
-
-
-	return false;
-}
-
-bool Warrior::hasSkill(std::string name)const {
-	for (int i = 0; i < skillCount; i++) {
-		if (skills[i]->getName() == name) {
-			return true;
-		}
+	if (skillCount >= maxSkills) {
 		return false;
 	}
 
+	Skill* nueva = new Skill(name, type, power, cost);
+
+	skills[skillCount] = nueva;
+	skillCount++;
+	 
+	return true;
+}
+
+bool Warrior::hasSkill(std::string name)const {
+	
+ for (int i = 0; i < skillCount; i++) {
+    if (skills[i]->getName() == name) {
+				return true;
+	}
+ }
+		return false;
+	
 }
 
 int Warrior::totalSkillEffect()const {
@@ -73,13 +76,8 @@ int Warrior::totalSkillEffect()const {
 
 int Warrior::calculatePower()const {
 
-	// TODO: retornar la formula:
-    // (attack * 2) + defense + (health / 10) 
-	// +totalSkillEffect()
+	return(attack * 2) + defense + (health / 10) + totalSkillEffect();
 
-
-
-	return 0;//Placeholder
 }
 
 std::string Warrior::getName()const { return name; }
@@ -91,10 +89,10 @@ int Warrior::getSkillCount()const { return skillCount; }
 
 std::string Warrior::toString()const {
 	std::ostringstream oss;
-	oss << "[" << combatClass << "]" << name
-	    << "|Attack   " << attack << " DEF" << defense 
-	    << "|HP       " << health << "skills" << skills
-	    << "/" << maxSkills << "/Power: " << calculatePower;
+	oss << "[" << combatClass << "] " << name
+		<< " | Attack " << attack << " | DEF " << defense
+		<< " | HP " << health << " | Skills: " << skillCount 
+		<< "/" << maxSkills << " | Power: " << calculatePower();
 	return oss.str();
 }
 
@@ -106,7 +104,6 @@ void Warrior::showSkills()const{
 			<< skills[i]->toString()
 			<< std::endl;
     }
-
 
 }
 
