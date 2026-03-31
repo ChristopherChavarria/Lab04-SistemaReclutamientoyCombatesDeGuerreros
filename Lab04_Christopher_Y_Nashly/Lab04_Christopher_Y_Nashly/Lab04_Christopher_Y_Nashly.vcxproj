@@ -123,11 +123,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Lab04_Christopher_Y_Nashly.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="Squad.cpp" />
+    <ClCompile Include="Warrior.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Skill.h" />
+    <ClInclude Include="Squad.h" />
+    <ClInclude Include="Warrior.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
