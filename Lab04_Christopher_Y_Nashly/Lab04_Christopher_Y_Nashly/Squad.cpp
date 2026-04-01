@@ -104,7 +104,27 @@ Warrior** Squad::getByClass(std::string cls, int& resultCount) const {
 	}
 	return result;
 }
-//funciones faltantes
+
+void Squad::sortByPower() {
+
+	for (int i = 0; i < count - 1; i++) {
+
+		for (int j = 0; j < count - i - 1; j++) {
+
+			if (warriors[j]->calculatePower() < warriors[j + 1]->calculatePower()) {
+
+				Warrior* temp = warriors[j];
+				warriors[j] = warriors[j + 1];
+				warriors[j + 1] = temp;
+
+			}
+		}
+
+	}
+
+}
+
+
 
 
 
