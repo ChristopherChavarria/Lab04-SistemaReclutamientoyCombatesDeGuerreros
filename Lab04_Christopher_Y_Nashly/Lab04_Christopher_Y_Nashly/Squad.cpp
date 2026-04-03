@@ -124,6 +124,29 @@ void Squad::sortByPower() {
 
 }
 
+std::string Squad::simulateBattle(const Squad& enemy) const {
+
+	int myPower = totalPower();
+	int enemyPower = enemy.totalPower();
+
+	std::stringstream result;
+
+	result << "Battle Result:\n";
+	result << name << " Power: " << myPower << "\n";
+	result << enemy.getName() << " Power: " << enemyPower << "\n";
+
+	if (myPower > enemyPower) {
+		result << "Winner: " << name;
+	}
+	else if (enemyPower > myPower) {
+		result << "Winner: " << enemy.getName();
+	}
+	else {
+		result << "Result: Draw";
+	}
+
+	return result.str();
+}
 
 
 
