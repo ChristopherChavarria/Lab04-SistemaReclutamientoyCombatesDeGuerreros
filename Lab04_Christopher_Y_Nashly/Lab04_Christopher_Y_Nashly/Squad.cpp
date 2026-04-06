@@ -18,22 +18,22 @@ Squad::~Squad() {
 }
 
 void Squad::expand() {
+
 	int newCapacity = capacity * 2;
+
 	Warrior** newArray = new Warrior * [newCapacity];
-	for (int i = 0; i < newCapacity; i++) {
+
+	for (int i = 0; i < count; i++) {
 		newArray[i] = warriors[i];
 	}
 
-	for (int i = 0; i < count; i++) {
+	for (int i = count; i < newCapacity; i++) {
 		newArray[i] = nullptr;
 	}
 
 	delete[] warriors;
 	warriors = newArray;
 	capacity = newCapacity;
-
-
-
 }
 
 Warrior* Squad::recruit(std::string name, std::string cls, int atk, int def, int hp, int maxSkills) {
@@ -81,6 +81,13 @@ void Squad::showSquad() const {
 int Squad::getCount()const {
 	return count;
 }
+
+std::string EIF201::Squad::getName() const
+{
+	return std::string();
+}
+
+
 
 Warrior** Squad::getByClass(std::string cls, int& resultCount) const {
 	resultCount = 0;
